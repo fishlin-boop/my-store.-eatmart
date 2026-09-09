@@ -21,6 +21,7 @@
             margin: 0;
             padding: 0;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -41,7 +42,7 @@
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -77,7 +78,7 @@
 
         nav {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -88,29 +89,33 @@
             font-weight: 500;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: color 0.2s;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            transition: background 0.2s, color 0.2s;
         }
 
-        nav a:hover {
+        nav a:hover, nav a:active {
             color: var(--primary);
+            background: var(--light);
         }
 
         .cart-badge {
             background: var(--primary);
             color: white;
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 9999px;
             font-weight: 600;
+            font-size: 0.85rem;
         }
 
         main {
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
         }
 
         .hero-banner {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
             color: white;
             padding: 4rem 2rem;
             border-radius: 1rem;
@@ -128,6 +133,7 @@
         .hero-banner p {
             font-size: 1.1rem;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
         }
 
         .section-title {
@@ -148,7 +154,7 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 1.5rem;
         }
 
@@ -185,7 +191,7 @@
         }
 
         .product-info h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
@@ -198,13 +204,13 @@
         }
 
         .product-price {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-dark);
         }
 
         .old-price {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-decoration: line-through;
             color: var(--gray);
         }
@@ -213,12 +219,17 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.65rem 1rem;
+            padding: 0.75rem 1rem;
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: background 0.2s;
+            text-align: center;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn:hover {
@@ -228,12 +239,13 @@
         .out-of-stock-badge {
             background: var(--danger);
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
             display: inline-block;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 600;
+            text-transform: uppercase;
         }
 
         .sale-badge {
@@ -263,16 +275,6 @@
             grid-column: 1 / -1;
         }
 
-        .coming-soon-card h3 {
-            font-size: 1.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .coming-soon-card p {
-            color: #4b5563;
-        }
-
         /* Toast Notifications */
         #toast-container {
             position: fixed;
@@ -282,19 +284,21 @@
             flex-direction: column;
             gap: 10px;
             z-index: 2000;
+            max-width: 90%;
         }
 
         .toast {
             background: var(--dark);
             color: white;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.25rem;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             display: flex;
             align-items: center;
             gap: 1rem;
             animation: slideIn 0.3s ease;
             cursor: pointer;
+            font-size: 0.95rem;
         }
 
         .toast.alert-toast {
@@ -311,10 +315,11 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 1rem;
         }
 
         .modal-content {
@@ -322,20 +327,27 @@
             padding: 2rem;
             border-radius: 1rem;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             position: relative;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
 
         .close-modal {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: none;
+            background: #f3f4f6;
             border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
             font-size: 1.25rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .admin-box {
@@ -344,6 +356,22 @@
             border: 2px dashed var(--secondary);
             border-radius: 0.5rem;
             background: #eff6ff;
+        }
+
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .cart-total {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -370,15 +398,15 @@
     <main>
         <div class="hero-banner">
             <h1 id="heroTitle">Welcome to EatMart!</h1>
-            <p>Your ultimate custom grocery store simulation for epic playtime battles.</p>
-            <div style="margin-top: 1rem;">
-                <button class="btn" style="width: auto; padding: 0.5rem 1rem; background: var(--secondary);" onclick="customizeStoreName()">Customize Store Name</button>
+            <p>Your custom grocery store simulation for ultimate playtime adventures.</p>
+            <div>
+                <button class="btn" style="width: auto; padding: 0.6rem 1.2rem; background: var(--secondary);" onclick="customizeStoreName()">Customize Store Name</button>
             </div>
         </div>
 
-        <!-- Sale Section -->
-        <section class="category-section" id="saleSection">
-            <h2 class="section-title">🔥 Clearance & Sale Items</h2>
+        <!-- Clearance & Sale Section -->
+        <section class="category-section">
+            <h2 class="section-title">🔥 Clearance & Snack Sale</h2>
             <div class="product-grid">
                 <div class="product-card" id="item-Takoos Spicy Rolls">
                     <span class="sale-badge">SALE</span>
@@ -391,7 +419,7 @@
                                 <span class="old-price">$2.99</span>
                             </div>
                         </div>
-                        <button class="btn" onclick="addToCart('Takoos Spicy Rolls')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Takoos Spicy Rolls', 1.99)">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product-card" id="item-Sandeos Cookie Pack">
@@ -405,7 +433,21 @@
                                 <span class="old-price">$2.29</span>
                             </div>
                         </div>
-                        <button class="btn" onclick="addToCart('Sandeos Cookie Pack')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Sandeos Cookie Pack', 1.49)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" id="item-Crunch-O's Pretzel Bites">
+                    <span class="sale-badge">SALE</span>
+                    <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Pretzel Bites">
+                    <div class="product-body">
+                        <div class="product-info">
+                            <h3>Crunch-O's Pretzel Bites</h3>
+                            <div class="price-container">
+                                <span class="product-price">$2.19</span>
+                                <span class="old-price">$3.19</span>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="addItemToCart('Crunch-O\'s Pretzel Bites', 2.19)">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -413,7 +455,7 @@
 
         <!-- Produce Section -->
         <section class="category-section">
-            <h2 class="section-title">Produce</h2>
+            <h2 class="section-title">🥬 Fresh Produce</h2>
             <div class="product-grid">
                 <div class="product-card" id="item-Organic Honeycrisp Apples">
                     <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Apples">
@@ -422,7 +464,7 @@
                             <h3>Organic Honeycrisp Apples</h3>
                             <div class="product-price">$2.99 / lb</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Organic Honeycrisp Apples')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Organic Honeycrisp Apples', 2.99)">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product-card" id="item-Fresh Yellow Bananas">
@@ -432,7 +474,7 @@
                             <h3>Fresh Yellow Bananas</h3>
                             <div class="product-price">$0.79 / lb</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Fresh Yellow Bananas')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Fresh Yellow Bananas', 0.79)">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product-card" id="item-Baby Spinach (16 oz)">
@@ -440,10 +482,21 @@
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Baby Spinach (16 oz)</h3>
-                            <div class="stock-status-wrap"><span class="out-of-stock-badge" style="display:none;">Out of Stock</span></div>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$3.49</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Baby Spinach (16 oz)')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Baby Spinach (16 oz)', 3.49)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" id="item-Crunchy Carrots (2 lb bag)">
+                    <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Carrots">
+                    <div class="product-body">
+                        <div class="product-info">
+                            <h3>Crunchy Carrots (2 lb)</h3>
+                            <div class="stock-status-wrap"></div>
+                            <div class="product-price">$1.89</div>
+                        </div>
+                        <button class="btn" onclick="addItemToCart('Crunchy Carrots (2 lb)', 1.89)">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -451,16 +504,17 @@
 
         <!-- Snacks Section -->
         <section class="category-section">
-            <h2 class="section-title">Snacks</h2>
+            <h2 class="section-title">🍿 Snacks & Sweets</h2>
             <div class="product-grid">
                 <div class="product-card" id="item-Sea Salt Potato Chips">
                     <img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Chips">
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Sea Salt Potato Chips</h3>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$2.49</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Sea Salt Potato Chips')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Sea Salt Potato Chips', 2.49)">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product-card" id="item-Cheez-Blasts Puffs">
@@ -468,9 +522,21 @@
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Cheez-Blasts Puffs</h3>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$3.29</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Cheez-Blasts Puffs')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Cheez-Blasts Puffs', 3.29)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" id="item-Sweet-Tooth Gummy Bears">
+                    <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Gummy Bears">
+                    <div class="product-body">
+                        <div class="product-info">
+                            <h3>Sweet-Tooth Gummy Bears</h3>
+                            <div class="stock-status-wrap"></div>
+                            <div class="product-price">$1.99</div>
+                        </div>
+                        <button class="btn" onclick="addItemToCart('Sweet-Tooth Gummy Bears', 1.99)">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -478,16 +544,17 @@
 
         <!-- Dairy Section -->
         <section class="category-section">
-            <h2 class="section-title">Dairy</h2>
+            <h2 class="section-title">🥛 Dairy & Refrigerated</h2>
             <div class="product-grid">
                 <div class="product-card" id="item-Whole Milk (1 Gallon)">
                     <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Milk">
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Whole Milk (1 Gallon)</h3>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$3.89</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Whole Milk (1 Gallon)')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Whole Milk (1 Gallon)', 3.89)">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product-card" id="item-Sharp Cheddar Block">
@@ -495,9 +562,21 @@
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Sharp Cheddar Block</h3>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$4.49</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Sharp Cheddar Block')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Sharp Cheddar Block', 4.49)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" id="item-Greek Vanilla Yogurt">
+                    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Yogurt">
+                    <div class="product-body">
+                        <div class="product-info">
+                            <h3>Greek Vanilla Yogurt</h3>
+                            <div class="stock-status-wrap"></div>
+                            <div class="product-price">$3.19</div>
+                        </div>
+                        <button class="btn" onclick="addItemToCart('Greek Vanilla Yogurt', 3.19)">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -505,16 +584,17 @@
 
         <!-- Drinks Section -->
         <section class="category-section">
-            <h2 class="section-title">Drinks</h2>
+            <h2 class="section-title">🥤 Drinks & Beverages</h2>
             <div class="product-grid">
                 <div class="product-card" id="item-Dr. Thirst Soda (12-Pack)">
                     <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Soda">
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Dr. Thirst Soda (12-Pack)</h3>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$5.49</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Dr. Thirst Soda (12-Pack)')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Dr. Thirst Soda (12-Pack)', 5.49)">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product-card" id="item-Cliff Drop Citrus Drink">
@@ -522,9 +602,21 @@
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Cliff Drop Citrus Drink</h3>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$4.19</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Cliff Drop Citrus Drink')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Cliff Drop Citrus Drink', 4.19)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" id="item-Sparkling Mountain Water">
+                    <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Water">
+                    <div class="product-body">
+                        <div class="product-info">
+                            <h3>Sparkling Mountain Water</h3>
+                            <div class="stock-status-wrap"></div>
+                            <div class="product-price">$3.99</div>
+                        </div>
+                        <button class="btn" onclick="addItemToCart('Sparkling Mountain Water', 3.99)">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -532,16 +624,17 @@
 
         <!-- Meat Section -->
         <section class="category-section">
-            <h2 class="section-title">Meat</h2>
+            <h2 class="section-title">🥩 Meat & Butcher</h2>
             <div class="product-grid">
                 <div class="product-card" id="item-Grass-Fed Ground Beef (1 lb)">
                     <img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Beef">
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Grass-Fed Ground Beef (1 lb)</h3>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$7.99</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Grass-Fed Ground Beef (1 lb)')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Grass-Fed Ground Beef (1 lb)', 7.99)">Add to Cart</button>
                     </div>
                 </div>
                 <div class="product-card" id="item-Boneless Chicken Breast (2 lb)">
@@ -549,9 +642,50 @@
                     <div class="product-body">
                         <div class="product-info">
                             <h3>Boneless Chicken Breast (2 lb)</h3>
+                            <div class="stock-status-wrap"></div>
                             <div class="product-price">$8.49</div>
                         </div>
-                        <button class="btn" onclick="addToCart('Boneless Chicken Breast (2 lb)')">Add to Cart</button>
+                        <button class="btn" onclick="addItemToCart('Boneless Chicken Breast (2 lb)', 8.49)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" id="item-Fresh Atlantic Salmon Fillets">
+                    <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Salmon">
+                    <div class="product-body">
+                        <div class="product-info">
+                            <h3>Fresh Atlantic Salmon Fillets</h3>
+                            <div class="stock-status-wrap"></div>
+                            <div class="product-price">$11.99</div>
+                        </div>
+                        <button class="btn" onclick="addItemToCart('Fresh Atlantic Salmon Fillets', 11.99)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bakery Section -->
+        <section class="category-section">
+            <h2 class="section-title">🍞 Bakery</h2>
+            <div class="product-grid">
+                <div class="product-card" id="item-Artisan Sourdough Loaf">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Bread">
+                    <div class="product-body">
+                        <div class="product-info">
+                            <h3>Artisan Sourdough Loaf</h3>
+                            <div class="stock-status-wrap"></div>
+                            <div class="product-price">$4.29</div>
+                        </div>
+                        <button class="btn" onclick="addItemToCart('Artisan Sourdough Loaf', 4.29)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card" id="item-Chocolate Chip Muffins (4-pack)">
+                    <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Muffins">
+                    <div class="product-body">
+                        <div class="product-info">
+                            <h3>Chocolate Muffins (4-pack)</h3>
+                            <div class="stock-status-wrap"></div>
+                            <div class="product-price">$3.99</div>
+                        </div>
+                        <button class="btn" onclick="addItemToCart('Chocolate Muffins (4-pack)', 3.99)">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -559,7 +693,7 @@
 
         <!-- Toy Section -->
         <section class="category-section">
-            <h2 class="section-title">Toys</h2>
+            <h2 class="section-title">🎮 Toys</h2>
             <div class="product-grid">
                 <div class="coming-soon-card">
                     <h3>Toy Department — Coming Soon!</h3>
@@ -594,7 +728,7 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('couponsModal')">&times;</button>
             <h2>Available Coupons</h2>
-            <p style="margin-top: 1rem;">🎟️ Use code <b>SNACKTIME26</b> for $10 off your playtime order!</p>
+            <p style="margin-top: 1rem;">🎟️ Use code <b>PLAYTIME2026</b> for $10 off your playtime order at checkout!</p>
         </div>
     </div>
 
@@ -609,12 +743,12 @@
                 <h3>Admin Portal</h3>
                 <p style="font-size: 0.9rem; margin-top: 0.25rem;">Enter Admin PIN code:</p>
                 <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-                    <input type="password" id="adminPinInput" placeholder="Enter PIN" style="padding: 0.45rem; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1;">
+                    <input type="password" id="adminPinInput" placeholder="Enter PIN" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1;">
                     <button class="btn" style="width: auto;" onclick="checkAdminPin()">Login</button>
                 </div>
                 <div id="adminPanel" style="display: none; margin-top: 1rem;">
                     <p style="color: var(--primary-dark); font-weight: bold;">🔓 Admin Access Granted!</p>
-                    <p style="font-size: 0.85rem; margin-top: 0.25rem;">Click the button below 50 times to restock all items:</p>
+                    <p style="font-size: 0.85rem; margin-top: 0.25rem;">Tap the button below 50 times to restock all items:</p>
                     <button class="btn" id="restockBtn" style="margin-top: 0.5rem; background: var(--secondary);" onclick="clickRestock()">Restock Clicker (<span id="clickCount">50</span> left)</button>
                 </div>
             </div>
@@ -625,14 +759,22 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('cartModal')">&times;</button>
             <h2>Shopping Cart</h2>
-            <ul id="cartItemsList" style="margin-top: 1rem; padding-left: 1.25rem;">
-                <li>Your cart is empty.</li>
-            </ul>
+            <div id="cartItemsList" style="margin-top: 1rem; max-height: 250px; overflow-y: auto;">
+                <p style="color: var(--gray); text-align: center; padding: 1rem;">Your cart is empty.</p>
+            </div>
+            <div class="cart-total" id="cartTotalSection" style="display: none;">
+                <span>Total:</span>
+                <span id="cartTotalPrice">$0.00</span>
+            </div>
+            <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
+                <input type="text" id="couponInput" placeholder="Coupon Code" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1;">
+                <button class="btn" style="width: auto; background: var(--secondary);" onclick="applyCoupon()">Apply</button>
+            </div>
+            <button class="btn" id="checkoutBtn" style="margin-top: 1rem; display: none;" onclick="checkoutCart()">Checkout (Fake Buy)</button>
         </div>
     </div>
 
     <script>
-        // Configurable Store Name
         let storeName = "EatMart";
 
         function customizeStoreName() {
@@ -646,19 +788,21 @@
         }
 
         let cartCount = 0;
-        let cartItems = [];
+        let cartItems = []; // Array of objects: {name, price}
         let restockClicksRemaining = 50;
+        let couponDiscount = 0;
 
-        // List of all mock items in the store that can go out of stock
         const allItems = [
-            "Takoos Spicy Rolls", "Sandeos Cookie Pack", "Organic Honeycrisp Apples", 
-            "Fresh Yellow Bananas", "Baby Spinach (16 oz)", "Sea Salt Potato Chips", 
-            "Cheez-Blasts Puffs", "Whole Milk (1 Gallon)", "Sharp Cheddar Block", 
-            "Dr. Thirst Soda (12-Pack)", "Cliff Drop Citrus Drink", "Grass-Fed Ground Beef (1 lb)", 
-            "Boneless Chicken Breast (2 lb)"
+            "Takoos Spicy Rolls", "Sandeos Cookie Pack", "Crunch-O's Pretzel Bites", 
+            "Organic Honeycrisp Apples", "Fresh Yellow Bananas", "Baby Spinach (16 oz)", "Crunchy Carrots (2 lb)",
+            "Sea Salt Potato Chips", "Cheez-Blasts Puffs", "Sweet-Tooth Gummy Bears",
+            "Whole Milk (1 Gallon)", "Sharp Cheddar Block", "Greek Vanilla Yogurt",
+            "Dr. Thirst Soda (12-Pack)", "Cliff Drop Citrus Drink", "Sparkling Mountain Water",
+            "Grass-Fed Ground Beef (1 lb)", "Boneless Chicken Breast (2 lb)", "Fresh Atlantic Salmon Fillets",
+            "Artisan Sourdough Loaf", "Chocolate Muffins (4-pack)"
         ];
 
-        function addToCart(itemName) {
+        function addItemToCart(itemName, price) {
             const card = document.getElementById('item-' + itemName);
             if (card && card.classList.contains('out-of-stock')) {
                 showToast("Cannot add! This item is currently Out of Stock.", true);
@@ -667,10 +811,10 @@
 
             cartCount++;
             document.getElementById('cartCount').innerText = cartCount;
-            cartItems.push(itemName);
-            updateCartList();
+            cartItems.push({ name: itemName, price: price });
+            updateCartUI();
             
-            showToast(`🛒 Added ${itemName} to cart! Click here to view.`, false, () => openModal('cartModal'));
+            showToast(`🛒 Added ${itemName} to cart! Tap here to view.`, false, () => openModal('cartModal'));
         }
 
         function showToast(message, isAlert = false, onClickCallback = null) {
@@ -680,7 +824,8 @@
             toast.innerHTML = `<span>${message}</span>`;
             
             if (onClickCallback) {
-                toast.onclick = () => {
+                toast.onclick = (e) => {
+                    // Don't trigger if they clicked text directly unless intended, but full toast click is great for mobile tapping
                     onClickCallback();
                     toast.remove();
                 };
@@ -694,18 +839,66 @@
             }, 4000);
         }
 
-        function updateCartList() {
+        function updateCartUI() {
             const list = document.getElementById('cartItemsList');
+            const totalSection = document.getElementById('cartTotalSection');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
             if (cartItems.length === 0) {
-                list.innerHTML = "<li>Your cart is empty.</li>";
+                list.innerHTML = `<p style="color: var(--gray); text-align: center; padding: 1rem;">Your cart is empty.</p>`;
+                totalSection.style.display = 'none';
+                checkoutBtn.style.display = 'none';
             } else {
                 list.innerHTML = "";
-                cartItems.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = item;
-                    list.appendChild(li);
+                let subtotal = 0;
+                cartItems.forEach((item, index) => {
+                    subtotal += item.price;
+                    const row = document.createElement('div');
+                    row.className = 'cart-item-row';
+                    row.innerHTML = `
+                        <span>${item.name}</span>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <span>$${item.price.toFixed(2)}</span>
+                            <button onclick="removeFromCart(${index})" style="background: none; border: none; color: var(--danger); cursor: pointer; font-weight: bold;">&times;</button>
+                        </div>
+                    `;
+                    list.appendChild(row);
                 });
+
+                let finalTotal = Math.max(0, subtotal - couponDiscount);
+                document.getElementById('cartTotalPrice').innerText = `$${finalTotal.toFixed(2)}`;
+                totalSection.style.display = 'flex';
+                checkoutBtn.style.display = 'block';
             }
+        }
+
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            cartCount = cartItems.length;
+            document.getElementById('cartCount').innerText = cartCount;
+            updateCartUI();
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('couponInput').value.trim().toUpperCase();
+            if (code === "PLAYTIME2026") {
+                couponDiscount = 10.00;
+                showToast("🎟️ Coupon applied successfully! $10.00 off.", false);
+                updateCartUI();
+            } else {
+                alert("Invalid coupon code! Try PLAYTIME2026");
+            }
+        }
+
+        function checkoutCart() {
+            if (cartItems.length === 0) return;
+            alert("🎉 Fake Purchase Successful! Your playtime grocery order has been placed successfully.");
+            cartItems = [];
+            cartCount = 0;
+            couponDiscount = 0;
+            document.getElementById('cartCount').innerText = 0;
+            updateCartUI();
+            closeModal('cartModal');
         }
 
         function openModal(modalId) {
@@ -727,19 +920,18 @@
             const pin = document.getElementById('adminPinInput').value;
             if (pin === "4474") {
                 document.getElementById('adminPanel').style.display = 'block';
-                showToast("Admin access unlocked!", false);
+                showToast("🔓 Admin access unlocked!", false);
             } else {
                 alert("Incorrect PIN code!");
             }
         }
 
-        // Restock clicker counter logic (requires 50 clicks)
+        // Restock clicker counter logic (requires 50 taps/clicks)
         function clickRestock() {
             restockClicksRemaining--;
             document.getElementById('clickCount').innerText = restockClicksRemaining;
             
             if (restockClicksRemaining <= 0) {
-                // Restock everything
                 allItems.forEach(itemName => {
                     setStockState(itemName, true);
                 });
@@ -776,9 +968,8 @@
             }
         }
 
-        // Simulated fake customer random purchases
+        // Simulated fake customer random purchases that run items out of stock
         setInterval(() => {
-            // Pick a random item that is currently in stock
             const inStockCards = document.querySelectorAll('.product-card:not(.out-of-stock)');
             if (inStockCards.length > 0) {
                 const randomCard = inStockCards[Math.floor(Math.random() * inStockCards.length)];
@@ -787,7 +978,7 @@
                 setStockState(itemName, false);
                 showToast(`⚡ Alert: A fake customer just bought the last ${itemName}!`, true);
             }
-        }, 25000); // Every 25 seconds a fake customer buys an item
+        }, 22000); // Every 22 seconds
     </script>
 </body>
 </html>
